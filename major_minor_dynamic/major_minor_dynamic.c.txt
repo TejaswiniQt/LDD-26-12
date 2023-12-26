@@ -1,0 +1,23 @@
+#include<linux/module.h>
+#include<linux/fs.h>
+
+dev_t device_number;
+
+static int __init pcd_driver_init(void)
+{
+	alloc_chrdev_region(&device_number,0,1,"pcd");
+	pr_info("Major number = %d, Minor number = %d\n",MAJOR(device_number),MINOR(device_number));
+
+
+	return 0;
+}
+
+static void __exit pcd_driver_exit(void)
+{
+
+}
+
+module_init(pcd_driver_init);
+module_exit(pcd_driver_exit);
+
+MODULE_LICENSE("GPL");
